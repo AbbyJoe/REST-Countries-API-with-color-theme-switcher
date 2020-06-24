@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-      <div class="container header">
+      <div class="container-fluid header">
           <h3>Where in the world?</h3>
           <div class="switch">
               <span>Dark Mode</span>
@@ -20,7 +20,7 @@ export default {
         background-color: hsl(209, 23%, 22%);
         color: #fff;
     }
-    .container {
+    .container-fluid {
         padding: 10px 10px;
         /* background-color: #f3f3f3; */
     }

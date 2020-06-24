@@ -1,6 +1,6 @@
 <template>
   <div>
-      <div class="container mt-5 search__field" style="display:flex; justify-content:space-between">
+      <div class="container-fluid mt-5 search__field" style="display:flex; justify-content:space-between">
         <div class="form-group has-search">
             <span class="fa fa-search form-control-feedback"></span>
             <input type="text" class="form-control" placeholder="Search">
@@ -21,16 +21,16 @@
       </div>
 
       <section>
-          <div class="container">
+          <div class="container-fluid">
               <div class="row">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3" v-for="(country, object) in countries" :key="country">
                       <div class="card__panel">
-                          <img src="https://restcountries.eu/data/afg.svg" class="img-fluid" alt="">
+                          <img :src="object.image" class="img-fluid" alt="">
                           <div class="content">
-                                <h6>Germany</h6>
-                                <p>Population</p>
-                                <p>Region</p>
-                                <p>Capital</p>
+                                <h6>{{object.name}}</h6>
+                                <p>{{object.population}}</p>
+                                <p>{{object.region}}</p>
+                                <p>{{object.capital}}</p>
                           </div>
                       </div>
                   </div>
@@ -41,10 +41,11 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
      data() {
         return {
-            // countries: [],
+            countries: [],
             name: '',
             regionFilter: '',
             options: ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'],
@@ -60,6 +61,12 @@ export default {
             this.showOption = false;
         }
     },
+    mounted() {
+        axios.get('https://restcountries.eu/rest/v2/all').then(res => this.countries = res.data)
+        .catch(err => {
+            console.log('oops', err)
+        })
+    }
 }
 </script>
 
@@ -68,6 +75,9 @@ export default {
         font-family: 'Nunito Sans', sans-serif;
         background-color: hsl(207, 26%, 17%);
     }
+    .container-fluid {
+    width: 93%;
+  }
     .has-search .form-control {
         padding-left: 2.375rem;
     }

@@ -13,5 +13,8 @@ export default {
 }
 </script>
 <style>
+  .container-fluid {
+    width: 93%;
+  }
  
 </style>
